@@ -1,7 +1,11 @@
 /* universal style */
-body {
+* {
     box-sizing: border-box;
     margin: 0;
+}
+
+body {
+    box-sizing: border-box;
     background-color: #EFFAFA;
     color: #2B3939;
     font-family: 'League Spartan', sans-serif;
@@ -12,16 +16,44 @@ body {
 .header-bg {
     height: 156px;
     width: 100%;
-     background: #5CA5A5 url(./images/bg-header-desktop.svg) center no-repeat;
-     background-size: cover;
-     margin-bottom: 4.6875em;
+    background: #5CA5A5 url(./images/bg-header-desktop.svg) center no-repeat;
+    background-size: cover;
+    margin-bottom: 4.6875em;
 }
+
+.search-box {
+    box-shadow: 0 7px 10px 3px rgba(150, 150, 150, 0.2);
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 0.125rem;
+    height: 72px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    top: -110px;
+
+}
+
+.search-box ul {
+    margin: 14px;
+    padding-left: 0;
+}
+
+.closeBtn::after {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 100%;
+    background-size: 22px;
+    background: #2B3939 url(./images/icon-remove.svg) center no-repeat;
+    position: absolute;
+    top: 0;
+} 
 
 .post-card {
     box-shadow: 0 7px 10px 3px rgba(150, 150, 150, 0.2);
     background-color: #FFFFFF;
     border-radius: 5px;
-    /* border-left: 10px solid #5CA5A5; */
     padding: 1.25rem;
     width: 80%;
     margin: 0 auto 2em auto;
@@ -30,9 +62,7 @@ body {
     align-items: center;
 }
 
-.job-details{
-    /* width: 10rem; */
-    /* width: max-content; */
+.job-details {
     flex-grow: 1;
     margin-left: 2rem;
 }
@@ -40,16 +70,14 @@ body {
 .post-details span.new-alert {
     margin-right: 0.75rem;
 }
-.post-details span.company{
-    margin-right: 1rem;
 
+.post-details span.company {
+    margin-right: 1rem;
 }
 
 .job-list img {
     width: 88px;
     height: 88px;
-    /* margin-left: 2rem;
-    margin-right: 2rem; */
 }
 
 ul li {
@@ -84,21 +112,22 @@ ul li {
 
 }
 
-.job-languages ul li {
+.req-skill {
     background-color: rgba(92, 165, 165, 0.301);
     padding: 0.65rem;
     border-radius: 4px;
     font-size: 1em;
+    width: max-content;
+    margin-right: 1em;
+    font-weight: 700; 
+    position: relative;
 }
 
-.job-languages ul li:hover{
+.req-skill:hover {
     cursor: pointer;
     background-color: #5CA5A5;
     color: #FFFFFF;
-}
-
-.job-languages ul > li {
-    margin-right: 1em;
+    /* transition: 1s; */
 }
 
 .position p {
@@ -112,6 +141,7 @@ ul li {
     color: #5CA5A5;
     cursor: pointer;
 }
+
 .post-info ul {
     font-size: 1.125rem;
     font-weight: 400;
@@ -127,12 +157,3 @@ ul li {
 }
 
 /* end universal style */
-
-/* MOBILE STYLE */
-/* mobile header */
-.mobile-header {
-    display: none;
-}
-
-/* end mobile header */
-/* MOBILE STYLE  */
