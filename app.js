@@ -149,85 +149,97 @@ const htmlData = [
         "languages": ["JavaScript"],
         "tools": ["React", "Sass"]
     }
-]
+];
 
+//select parent container for all job post
 let parentContainer = document.querySelector('.job-list');
+
 
 const jobInfoGetter = (jobSkillsInfo,id) =>{
     jobSkillsInfo.forEach(jobSkill =>{
-        document.querySelector('.job-skills-list'+id).innerHTML +=  `
-            <li class="req-skill">${jobSkill}</li>
-        `;
-
-    })
-   
+        document.querySelector('.job-skills-list'+id).innerHTML +=  `<li class="req-skill">${jobSkill}</li>`;
+    }) 
 }
 
 htmlData.forEach((data) => {
     const jobSkillsInfo = Array(data.role,data.level,...data.languages,...data.tools);
     
-     parentContainer.innerHTML +=
+parentContainer.innerHTML +=
      `<section class="post-card" style="${data.new && data.featured ? ' border-left: 5px solid #5CA5A5;' :''}">
-       <div class="job-icon">
-         <img src="${data.logo}" alt="${data.company}">
-       </div>
-    
-       <div class="job-details">
-         <div class="post-details">
-           <span class="company">${data.company}</span>
-           <span class="new-alert" style ="${data.new ? "display: inline-block" : "display: none"}">${data.new ? 'NEW!' : ''}</span>
-           <span class="featured-alert"  style ="${data.featured ? "display: inline-block" : "display: none"}">${data.featured ? 'Featured' : ''}</span>
-         </div>
-    
-         <div class="position">                  
-           <p>${data.position}</p>
-         </div>
-         <div class="post-info">
-           <ul>
-             <li class="post-desc day">${data.postedAt} &#8226;</li>
-             <li class="post-desc job-type">${data.contract} &#8226;</li>
-             <li class="post-desc location">${data.location}</li>
-           </ul>
-         </div>
+
+        <div class="job-icon">
+            <img src="${data.logo}" alt="${data.company}">
+            </div>
+            
+            <div class="job-details">
+                <div class="post-details">
+                <span class="company">${data.company}</span>
+                <span class="new-alert" style ="${data.new ? "display: inline-block" : "display: none"}">${data.new ? 'NEW!' : ''}</span>
+                <span class="featured-alert"  style ="${data.featured ? "display: inline-block" : "display: none"}">${data.featured ? 'Featured' : ''}</span>
+            </div>
+        
+            <div class="position">                  
+                <p>${data.position}</p>
+            </div>
+
+            <div class="post-info">
+            <ul>
+                <li class="post-desc day">${data.postedAt} &#8226;</li>
+                <li class="post-desc job-type">${data.contract} &#8226;</li>
+                <li class="post-desc location">${data.location}</li>
+            </ul>
+            </div>
        </div>
     
         <div class="job-skills">
-            <ul class="job-skills-list${data.id}">              
-            </ul>
+            <ul class="job-skills-list${data.id}"></ul>
         </div>
-     </section>`;
+    </section>`;
     jobInfoGetter(jobSkillsInfo,data.id)
 })
 
+
 const searchBox = document.querySelector('#searchBar ul');
-// console.log(searchBox)
 
 //job filtering text array
 let jobFilter = [];
+let list = '';
 
  jobSkills = document.querySelectorAll(`[class^="job-skills-list"] > li`)
 
- const displaySearchItem = (tags) => {
-   
-    tags.forEach(tag =>searchBox.innerHTML += tag);
+ const displaySearchItem = (searchItem,lists) => {
+     searchBox.parentElement.style.display = "block" ;
+    searchItem.forEach(item =>searchBox.innerHTML += item);
+    lists.map(list =>{
+        Array.from(parentContainer.children)
+        .filter(postCard => !postCard.textContent.includes(list))
+        .forEach(card =>{ card.classList.add('none')})
+    } )   
  }
 
- //EVENT HANDLER
- //
+ //job post filter event handlig
  jobSkills.forEach(e =>{
    e.addEventListener('click', (event) =>{
         jobFilter.push(event.target.innerText);
+        
+        //filter clicked elements - eliminate repitition
+        list = jobFilter.filter((item, index) => jobFilter.indexOf(item) === index);
 
-        let list = jobFilter.filter((item, index) => jobFilter.indexOf(item) === index);
-        console.log(list);
+        //store filtered items in this array
         let tags = [];
-        list.map(value => tags.push(`<li class="filtered-item closeBtn">${value}</li>`));
+        list.map((value,index) => tags.push(`<li class="filtered-item">${value}<span class="closeBtn closeBtn${index}" onclick="closehandler(${index})"><img src="./images/icon-remove.svg" alt="close button"></span></li>`));
         
         //set ul to empty 
         searchBox.innerHTML = '';
-        displaySearchItem(tags);  
+        displaySearchItem(tags,list);  
     })
  })
+
+//close button event handler
+const closehandler = (id) =>{
+const closeButtons = document.querySelectorAll('.closeBtn'+id);
+}
+
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
