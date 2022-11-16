@@ -198,4 +198,36 @@ htmlData.forEach((data) => {
      </section>`;
     jobInfoGetter(jobSkillsInfo,data.id)
 })
- 
+
+const searchBox = document.querySelector('#searchBar ul');
+// console.log(searchBox)
+
+//job filtering text array
+let jobFilter = [];
+
+ jobSkills = document.querySelectorAll(`[class^="job-skills-list"] > li`)
+
+ const displaySearchItem = (tags) => {
+   
+    tags.forEach(tag =>searchBox.innerHTML += tag);
+ }
+
+ //EVENT HANDLER
+ //
+ jobSkills.forEach(e =>{
+   e.addEventListener('click', (event) =>{
+        jobFilter.push(event.target.innerText);
+
+        let list = jobFilter.filter((item, index) => jobFilter.indexOf(item) === index);
+        console.log(list);
+        let tags = [];
+        list.map(value => tags.push(`<li class="filtered-item closeBtn">${value}</li>`));
+        
+        //set ul to empty 
+        searchBox.innerHTML = '';
+        displaySearchItem(tags);  
+    })
+ })
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
