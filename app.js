@@ -155,17 +155,17 @@ const htmlData = [
 let parentContainer = document.querySelector('.job-list');
 
 
-const jobInfoGetter = (jobSkillsInfo,id) =>{
-    jobSkillsInfo.forEach(jobSkill =>{
-        document.querySelector('.job-skills-list'+id).innerHTML +=  `<li class="req-skill">${jobSkill}</li>`;
-    }) 
+const jobInfoGetter = (jobSkillsInfo, id) => {
+    jobSkillsInfo.forEach(jobSkill => {
+        document.querySelector('.job-skills-list' + id).innerHTML += `<li class="req-skill">${jobSkill}</li>`;
+    })
 }
 
 htmlData.forEach((data) => {
-    const jobSkillsInfo = Array(data.role,data.level,...data.languages,...data.tools);
-    
-parentContainer.innerHTML +=
-     `<section class="post-card" style="${data.new && data.featured ? ' border-left: 5px solid #5CA5A5;' :''}">
+    const jobSkillsInfo = Array(data.role, data.level, ...data.languages, ...data.tools);
+
+    parentContainer.innerHTML +=
+        `<section class="post-card" style="${data.new && data.featured ? ' border-left: 5px solid #5CA5A5;' : ''}">
 
         <div class="job-icon">
             <img src="${data.logo}" alt="${data.company}">
@@ -195,7 +195,7 @@ parentContainer.innerHTML +=
             <ul class="job-skills-list${data.id}"></ul>
         </div>
     </section>`;
-    jobInfoGetter(jobSkillsInfo,data.id)
+    jobInfoGetter(jobSkillsInfo, data.id)
 })
 
 
@@ -203,43 +203,75 @@ const searchBox = document.querySelector('#searchBar ul');
 
 //job filtering text array
 let jobFilter = [];
-let list = '';
+let list = [];
 
- jobSkills = document.querySelectorAll(`[class^="job-skills-list"] > li`)
+jobSkills = document.querySelectorAll(`[class^="job-skills-list"] > li`)
 
- const displaySearchItem = (searchItem,lists) => {
-     searchBox.parentElement.style.display = "block" ;
-    searchItem.forEach(item =>searchBox.innerHTML += item);
-    lists.map(list =>{
+const displaySearchItem = (searchItem, lists) => {
+    searchBox.parentElement.style.display = "flex";
+    searchItem.forEach(item => searchBox.innerHTML += item);
+    lists.map(list => {
         Array.from(parentContainer.children)
-        .filter(postCard => !postCard.textContent.includes(list))
-        .forEach(card =>{ card.classList.add('none')})
-    } )   
- }
+            .filter(postCard => !postCard.textContent.includes(list))
+            .forEach(card => { card.classList.add('none') })
+    })
+}
 
- //job post filter event handlig
- jobSkills.forEach(e =>{
-   e.addEventListener('click', (event) =>{
+//job post filter event handlig
+jobSkills.forEach(e => {
+    e.addEventListener('click', (event) => {
         jobFilter.push(event.target.innerText);
-        
+
         //filter clicked elements - eliminate repitition
         list = jobFilter.filter((item, index) => jobFilter.indexOf(item) === index);
 
         //store filtered items in this array
         let tags = [];
-        list.map((value,index) => tags.push(`<li class="filtered-item">${value}<span class="closeBtn closeBtn${index}" onclick="closehandler(${index})"><img src="./images/icon-remove.svg" alt="close button"></span></li>`));
-        
+        list.map((value, index) => tags.push(`<li class="filtered-item filtered-item${index}">${value}<span class="closeBtn closeBtn${index}" onclick="closehandler(${index})"><img src="./images/icon-remove.svg" alt="close button"></span></li>`));
+
         //set ul to empty 
         searchBox.innerHTML = '';
-        displaySearchItem(tags,list);  
+        displaySearchItem(tags, list);
     })
- })
+})
 
 //close button event handler
-const closehandler = (id) =>{
-const closeButtons = document.querySelectorAll('.closeBtn'+id);
+const closehandler = (id) => {
+    const selectedList = document.querySelector('.filtered-item' + id);
+    const lists = list;
+    const index = lists.indexOf(`${selectedList.innerText}`);
+    if(index > -1) lists.splice(index,1);
+
+    Array.from(parentContainer.children)
+    .forEach(card => { card.classList.remove('none')});
+
+    lists.map(list => {
+        Array.from(parentContainer.children)
+            .filter(postCard => !postCard.textContent.includes(list))
+            .forEach(card => { card.classList.add('none') })
+    })
+
+    let tags = [];
+    lists.map((value, index) => tags.push(`<li class="filtered-item filtered-item${index}">${value}<span class="closeBtn closeBtn${index}" onclick="closehandler(${index})"><img src="./images/icon-remove.svg" alt="close button"></span></li>`));
+
+    //set ul to empty 
+    searchBox.innerHTML = '';
+    tags.forEach(item => searchBox.innerHTML += item);
+    lists.length == 0 ? searchBox.parentElement.style.display = "none" :'';
+    jobFilter = lists;
+    // displaySearchItem(tags, list);
+
 }
 
 
+//clear button 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', (event) => {
+    Array.from(parentContainer.children)
+    .forEach(card => { card.classList.remove('none')});
+
+    jobFilter = [];
+    searchBox.parentElement.style.display = "none";
+})
+// console.log(clearButton)

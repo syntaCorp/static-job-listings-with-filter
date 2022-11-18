@@ -24,6 +24,9 @@ body {
 
 
 .search-box {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
     box-shadow: 0 7px 10px 3px rgba(150, 150, 150, 0.2);
     background-color: #FFFFFF;
     border-radius: 5px;
@@ -44,9 +47,22 @@ body {
     gap: 1rem;
 
 }
-div#searchBar{
-    display: none;
+
+.search-box .clear{
+    color: #5CA5A5;
+    padding-right: 1rem;
+    font-weight: 700;
+    cursor: pointer;
 }
+.search-box .clear:hover{
+    /* color: #5CA5A5; */
+    text-decoration: underline;
+    /* cursor: ; */
+}
+
+/* div#searchBar{
+    display: none;
+} */
 
 
 .filtered-item {
@@ -114,7 +130,9 @@ cursor: pointer;
 .post-details span.company {
     margin-right: 1rem;
 }
-
+.job-skills {
+    margin-right: -0.99em;
+}
 .job-list img {
     width: 88px;
     height: 88px;
@@ -175,6 +193,7 @@ ul li {
     line-height: 2;
     font-size: 1.375rem;
     font-weight: 700;
+    display: inline-block;
 }
 
 .position p:hover {
@@ -191,6 +210,9 @@ ul li {
 }
 
 .attribution {
+    position: absolute;
+    bottom: 0;
+    /* top: 0; */
     text-align: center;
     font-size: 1rem;
     margin-top: 1em;
@@ -200,6 +222,7 @@ ul li {
 text-decoration: none;
 color: #2B3939;
 }
+
 .attribution a:hover {
     text-decoration: underline;
     color: #5CA5A5;
