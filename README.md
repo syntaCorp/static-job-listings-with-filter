@@ -1,16 +1,16 @@
-# Frontend Mentor - Job Listing with Filtering (static)
+## Frontend Mentor - Job Listing with Filtering (static)
 
 Frontend Career path challenge by Frontend Mentor 
 
-#Built with:
+##Built with:
 - HTML
 - CSS
 - Vanilla JS
 
-#Project Links
+##Project Links
 - Live 
 - Repo (https://github.com/syntaCorp/static-job-listings-with-filter)
 
-#Author:
+##Author:
 Kwaku T.D
 - Github - SyntaCorp(https://github.com/syntaCorp)
