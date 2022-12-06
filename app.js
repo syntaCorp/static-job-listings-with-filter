@@ -190,7 +190,7 @@ htmlData.forEach((data) => {
             </ul>
             </div>
        </div>
-    
+       <div class="horizontal-line"></div>
         <div class="job-skills">
             <ul class="job-skills-list${data.id}"></ul>
         </div>
