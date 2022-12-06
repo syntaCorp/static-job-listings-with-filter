@@ -49,7 +49,6 @@ body {
 .closeBtn:hover {
     cursor: pointer;
     background: #2B3939 center no-repeat;
-
 }
 
 .closeBtn img {
@@ -58,7 +57,6 @@ body {
 }
 
 /* deaktop style */
-
 .header-bg {
     height: 156px;
     width: 100%;
@@ -198,6 +196,12 @@ ul li {
 .horizontal-rule {
     display: none;
 }
+ul li {
+    margin-bottom: 1rem;
+}
+.search-box ul{
+    padding-left: 0;
+}
 
 /* end universal style */
 
@@ -310,20 +314,9 @@ ul li {
         line-height: 1.5;
     }
 
-    /* 
-    .post-info ul {
-        margin-bottom: .945rem;
-        
-    } */
-
     .job-skills ul {
         padding-left: 0;
     }
-
-    ul li {
-        margin-bottom: 1rem;
-    }
-
 }
 
 /* END MOBILE/TABLET LAYOUT */
@@ -332,13 +325,16 @@ ul li {
 @media only screen and (min-width:900px) and (max-width:1126px) {
 
     .search-box ul {
-        margin: 14px;
+        /* margin: 14px; */
         padding-left: 0;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         gap: 1rem;
     }
+    .search-box li{
+margin-bottom: 0;    
+}
 
     .search-box {
         display: none;
@@ -374,10 +370,10 @@ ul li {
     .job-skills ul {
         padding-left: 0;
     }
-
+/* 
     ul li {
-        margin-bottom: 0;
-    }
+        margin-bottom: 1rem;
+    } */
 
     .position p {
         line-height: 1.725;
@@ -412,7 +408,9 @@ ul li {
     }
 
     .search-box ul {
-        padding: 0;
+        /* padding: 0; */
+        margin-bottom: 0;
+
     }
 
     .job-details {
