@@ -154,15 +154,19 @@ const htmlData = [
 //select parent container for all job post
 let parentContainer = document.querySelector('.job-list');
 
-
+//loop through properties and list on page. job list bordered tags
 const jobInfoGetter = (jobSkillsInfo, id) => {
     jobSkillsInfo.forEach(jobSkill => {
         document.querySelector('.job-skills-list' + id).innerHTML += `<li class="req-skill">${jobSkill}</li>`;
     })
 }
 
+/* 
+load imported data and
+render content to page 
+// */
 htmlData.forEach((data) => {
-    const jobSkillsInfo = Array(data.role, data.level, ...data.languages, ...data.tools);
+    const jobSkillsInfo = new Array(data.role, data.level, ...data.languages, ...data.tools);
 
     parentContainer.innerHTML +=
         `<section class="post-card" style="${data.new && data.featured ? ' border-left: 5px solid #5CA5A5;' : ''}">
@@ -196,16 +200,16 @@ htmlData.forEach((data) => {
         </div>
     </section>`;
     jobInfoGetter(jobSkillsInfo, data.id)
-})
+});
 
-
+//filtered jobs bar
 const searchBox = document.querySelector('#searchBar ul');
 
 //job filtering text array
 let jobFilter = [];
 let list = [];
 
-jobSkills = document.querySelectorAll(`[class^="job-skills-list"] > li`)
+const jobSkills = document.querySelectorAll(`[class^="job-skills-list"] > li`)
 
 const displaySearchItem = (searchItem, lists) => {
     searchBox.parentElement.style.display = "flex";
@@ -235,15 +239,15 @@ jobSkills.forEach(e => {
     })
 })
 
-//close button event handler
+//filtered skills close button event handler
 const closehandler = (id) => {
     const selectedList = document.querySelector('.filtered-item' + id);
     const lists = list;
     const index = lists.indexOf(`${selectedList.innerText}`);
-    if(index > -1) lists.splice(index,1);
+    if (index > -1) lists.splice(index, 1);
 
     Array.from(parentContainer.children)
-    .forEach(card => { card.classList.remove('none')});
+        .forEach(card => { card.classList.remove('none') });
 
     lists.map(list => {
         Array.from(parentContainer.children)
@@ -257,21 +261,17 @@ const closehandler = (id) => {
     //set ul to empty 
     searchBox.innerHTML = '';
     tags.forEach(item => searchBox.innerHTML += item);
-    lists.length == 0 ? searchBox.parentElement.style.display = "none" :'';
+    lists.length == 0 ? searchBox.parentElement.style.display = "none" : '';
     jobFilter = lists;
     // displaySearchItem(tags, list);
-
 }
 
-
-//clear button 
-
+//clear button action
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', (event) => {
     Array.from(parentContainer.children)
-    .forEach(card => { card.classList.remove('none')});
+        .forEach(card => { card.classList.remove('none') });
 
     jobFilter = [];
     searchBox.parentElement.style.display = "none";
 })
-// console.log(clearButton)
